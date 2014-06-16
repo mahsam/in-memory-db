@@ -127,7 +127,15 @@ class InMemoryDB(object):
 		except IndexError:
 			print('Please type a valid command')
 
-inramdb = InMemoryDB()
 
-for line in fileinput.input():
-	inramdb.parse_command(line)
+if __name__ == '__main__':
+	inramdb = InMemoryDB()
+	try:
+		if len(sys.argv) != 1:
+			for line in fileinput.input():
+				inramdb.parse_command(line)
+	except IOError as e:
+		print "I/O error({0}): {1}".format(e.errno, e.strerror)
+else:
+	print "Imported simple_db"
+
